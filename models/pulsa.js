@@ -27,7 +27,7 @@ const PulsaSchema = new mongoose.Schema({
 
 const validatePulsa = (pulsa) => {
     const schema = yup.object().shape({
-        pulsaName: yup.string().required().min(2).max(100),
+        name: yup.string().required().min(2).max(100),
         saldo: yup.string().required().min(2),
         harga: yup.string().required().min(2),
         bonus: yup.string().min(2),
