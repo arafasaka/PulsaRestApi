@@ -1,9 +1,12 @@
 const express = require('express');
-const Pulsa = require('../models/pulsa');
+const {Pulsa, validatePulsa} = require('../models/pulsa');
 const router = express.Router();
 
+
 //POST
-router.post('/', (req,res) => {
+router.post('/', async (req,res) => {
+    const error = await validatePulsa(req.body);
+    if (error.message) res.status(400).send(error.message);
 
     pulsa = new Pulsa({
         name: req.body.pulsaName,
@@ -20,5 +23,7 @@ router.post('/', (req,res) => {
             res.status(500).send("pulsa not stored");
         })
 })
+
+
 
 module.exports = router;
